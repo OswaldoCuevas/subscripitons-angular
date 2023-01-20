@@ -1,0 +1,73 @@
+<div class="content-secondary">
+    <div class="content-table">
+        <nav class="nav-content-table">
+            <span class="title-table">Registrando tarjeta</span>
+            <div class="var-options">
+                <span ><i class="fa-solid fa-rotate-left"></i></span>
+                <span class="exit" id="tarjetas" routerLink="/payments-logs"><i class="fa-solid fa-xmark"></i></span></div>
+        </nav>
+        <form class="group-inputs" (submit)="addPaymentLog(producto,  payment_logs_num,  customer, price, product_quantity, start_date_payment_logs)">
+            <div class="row">
+                <div class="col col-6">
+                    <label for="customer" >Nombre de usuario</label>
+                    <div class="icon-input">
+                        <input #customer type="text"  placeholder="Nombre y apellido" required>
+                        <span ><i class="fa-solid fa-user"></i></span>
+                    </div>
+                </div>
+                <div class= "col col-3">
+                    <label for="payment_logs_num">Tarjeta</label>
+                    <div class="icon-input">
+                        <input  #payment_logs_num type="text" placeholder="Número" required>
+                        <span ><i class="fa-solid fa-tablet"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-6"> 
+                    <label for="producto"> producto</label>
+                    <div class="icon-input">
+                        <input #producto type="text" placeholder="Nombre de producto" required>    
+                        <span><i class="fa-solid fa-box"></i></span>
+                    </div>
+                
+                </div>
+                <div class="col col-3">
+                    <label for="price"> Costo </label>
+                    <div class="icon-input">
+                        <input #price type="number" placeholder="precio final" required>
+                        <span ><i class="fa-solid fa-dollar-sign"></i></span>
+                    </div>  
+                </div>
+                  
+            </div>
+            <div class="row">
+                <div class="col col-6"> 
+                    <label for="start_date_payment_logs">fecha</label>
+                    <div class="icon-input">
+                        <input #start_date_payment_logs type="date" name="fecha_inicio" id="fecha_inicio" required>    
+                       
+                    </div>
+                
+                </div>  
+                <div class="col col-3">
+                    <label for="product_quantity"> cantidad </label>
+                    <div class="icon-input">
+                        <input #product_quantity type="number" name="costo" id="costo" placeholder="Cantidad" required>
+                        <span><i class="fa-solid fa-box"></i></span>
+                    </div>  
+                </div>
+            </div> 
+            
+            <div class="costos-meses">
+                <span class="precios-meses">Precio a meses</span>
+                <div><span>Contado </span>  <span id="contado">$0</span></div>
+                <div><span>1 Mes </span>    <span id="mes-1">$0</span></div>
+                <div><span>3 Meses </span>  <span id="mes-3">$0</span></div>
+                <div><span>6 Meses </span>  <span id="mes-6">$0</span></div>
+            </div>
+            <button type="submit"> Registrar</button>
+        </form>
+       
+    </div> 
+</div>

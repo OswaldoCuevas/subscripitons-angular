@@ -1,0 +1,71 @@
+
+$color-1:rgb(0, 176, 234);
+$color-1-linear:linear-gradient(8deg, rgba(0,177,234,1) 0%, rgba(1,181,238,1) 26%, rgba(0,177,234,1) 100%);
+$color-1-secondary: rgb(1, 161, 214);
+$color-1-secondary-disable: rgba(4, 134, 177, 0.445); 
+$font-primary: 'Lato', sans-serif;
+.span-precio{
+    align-self: center;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span{
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     padding: 30px 50px;
+     border-radius: 5px;
+     font-size: 35px;
+     font-family: $font-primary;
+     margin-top: 40px;
+     border-top:15px solid $color-1-secondary ;
+    }
+ }
+ canvas{
+
+ }
+ .dates{
+align-self: center;
+width: 80%;
+display: flex;
+justify-content: space-between;
+margin-left: 10%;
+margin-top: 40px;
+margin-bottom: 20px;
+button{
+    background-color: transparent;
+    border: none;
+    color: $color-1;
+    font-size: 40px;
+    cursor: pointer;
+}
+span{
+    font-size: 30px;
+    font-family: $font-primary;
+}
+ }
+ .filtrar-chart{
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: space-between;
+    span{
+        padding: 5px 10px;
+        border: 1px solid rgb(161, 161, 161);
+        border-radius: 20px;
+        color: rgb(83, 82, 82);
+        font-family: $font-primary;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+   
+        &:not(.active-filter):hover{
+            border: 1px solid $color-1;
+            color: $color-1;
+        }
+        
+    }
+    .active-filter{
+        border: 2px solid $color-1;
+        color: $color-1;  
+        font-weight: bold;
+    }  
+ }

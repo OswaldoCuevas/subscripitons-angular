@@ -1,0 +1,73 @@
+<div class="content-secondary">
+    <div class="content-table">
+        <nav class="nav-content-table">
+            <span class="title-table">Tarjeta</span>
+            <div class="var-options">
+                <span><i class="fa-solid fa-pen-to-square"></i></span>
+                <span class="exit" id="tarjetas" routerLink="/payments-logs"><i class="fa-solid fa-xmark"></i></span></div>
+        </nav>
+       <div class="group-span">
+            <div>
+                <span><p>Producto:</p><p> {{ paymentLog.producto}}</p></span>
+                <span><p>Usuario:</p><p> {{ paymentLog.customer}}</p></span>
+            </div>
+            <div>
+                <span><p>Inicio:</p><p> {{date(paymentLog.start_date_payment_logs)}}</p></span>
+                <span><p>Tarjeta:</p><p> {{paymentLog.payment_logs_num}}</p></span>
+            </div>  
+       </div>
+       <div class="span-precio"><span >${{paymentLog.price}} MXN</span></div>
+       <form class="group-inputs" (submit)="addPayment(payment,payment_date)">
+        <div class="row">
+            <div class="col col-3">
+                <label for="nombre" >Monto</label>
+                <div class="icon-input">
+                    <input  type="number" #payment placeholder="ingres" required>
+                    <span ><i class="fa-solid fa-dollar-sign"></i></span>
+                </div>
+            </div>
+            <div class= "col col-3">
+                <label for="numero_tarjeta">Fecha</label>
+                <div class="icon-input">
+                    <input  type ="date"#payment_date>
+                    
+                </div>
+            </div>
+
+            <div class= "col col-3">
+                
+                <button type="submit" > Registrar</button>
+            </div>
+        </div>
+       
+           
+        
+       
+       
+    </form>
+       <table class="table">
+        <thead>
+          <tr >
+            <th scope="col"><span class="title-col">Pago</span> </th>
+            <th scope="col"><span class="title-col">Monto</span> </th>
+            <th scope="col"><span class="title-col">Contado</span></th>
+            <th scope="col"><span class="title-col">3 meses</span></th>
+            <th scope="col"><span class="title-col">Final</span></th>
+            <th scope="col"><span class="title-col">Fecha</span></th>
+          
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+        <tr *ngFor="let payment of payments; let i = index">
+            <td>{{i+1}}</td>
+            <td>${{payment.payment}}</td>
+            <td>${{payment.price_1}}</td>
+            <td>${{payment.price_3}}</td>
+            <td>${{payment.price_}}</td>
+            <td>{{date(payment.payment_date)}}</td>
+        </tr>
+      </table> 
+    </div> 
+  
+</div>

@@ -1,0 +1,13 @@
+<div class="content-secondary">
+    <div class="info-general">
+        <nav> <span>Información general</span> </nav>
+        <app-line-chart (messageEvent)="receiveMessage($event)"></app-line-chart>
+    </div>
+    <div class="info-users">
+        <nav class="nav-options-user">
+            <span class="active option" (click)="payments($event)" >Pagados</span>
+            <span class="option" (click)="notPayments($event)">Pendientes</span>
+        </nav>
+        <app-table-user-payments></app-table-user-payments>
+    </div>
+</div>

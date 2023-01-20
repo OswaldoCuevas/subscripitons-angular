@@ -1,0 +1,27 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><span class="title-col">Número</span> </th>
+        <th scope="col"><span class="title-col">Cliente</span> </th>
+        <th scope="col"><span class="title-col">Producto</span></th>
+        <th scope="col" class="no-important"><span class="title-col">Cantidad</span></th>
+        <th scope="col" class="no-important"><span class="title-col">Costo</span></th>
+        <th scope="col" class="no-important"><span class="title-col">Fecha</span></th>
+        <th scope="col"><span class="title-col">Finalizado</span></th>
+      
+    </tr>
+    </thead>
+    <tbody class="tbody">
+        <tr  *ngFor="let paymentLog of paymentLogs" [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]">
+            <th scope="row"  >{{paymentLog.payment_logs_num}}</th>
+                <td  >{{paymentLog.customer}}</td>
+                <td >{{paymentLog.producto}}</td>
+                <td class="no-important">{{paymentLog.product_quantity}}</td>
+                <td class="no-important">{{paymentLog.price}}</td>
+                <td class="no-important">{{date(paymentLog.start_date_payment_logs)}}</td>
+                <td class="finalizado" *ngIf="!paymentLog.finalized"><span class="warning">Pendiente</span></td>
+                <td class="finalizado" *ngIf="paymentLog.finalized"><span class="success">Finalizado</span></td>
+                  
+        </tr>
+    </tbody>
+  </table>

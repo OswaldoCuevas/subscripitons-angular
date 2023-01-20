@@ -1,0 +1,19 @@
+
+<div class="span-precio"><span >${{payments_full}} MXN</span></div>
+<div class="dates">
+        <button (click)="decreaseMonth()"><i class="fa-solid fa-caret-left"></i></button>
+        <span>{{dateSelected}}</span>
+        <button (click)="incrementMonth()"><i class="fa-solid fa-caret-right"></i></button>
+</div>
+<canvas baseChart class="chart"
+        [data]="lineChartData"
+        [type]="lineChartType"
+></canvas>
+
+<div class="filtrar-chart">
+        <span class=" option-dates active-filter" id="week" (click)="clicked($event)">Semana</span>
+        <span class=" option-dates" id="month" (click)="clicked($event)">Mes</span>
+        <span class=" option-dates" id="year" (click)="clicked($event)">Año</span>
+        <span class=" option-dates" id="all" (click)="clicked($event)">Todo</span>
+</div>
+
