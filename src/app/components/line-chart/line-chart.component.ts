@@ -112,15 +112,38 @@ this.messageEvent.emit({type:this.typeDate,month:this.numberMonth,year:this.year
 //imprimir grafica con datos del server
 getWeeklyPayments(){
   this.dataService.getWeeklyPayments().subscribe(data => {
+    
     this.printGraph(data)
+ 
+    
+  },error => {
+    if(error.status === 403){
+      console.log('Usuario sin credenciales')
+    }
+    if(error.status === 404){
+      this.notFound()
+    }
   });
+}
+notFound(){
+  this.lineChartData.datasets[0].data = [0]
+  this.lineChartData.datasets[1].data =  [0]
+  this.lineChartData.labels =  [0]
+  this.chart?.update();
 }
 getPaymentsGroupedByDays(){
   this.dataService.getPaymentsGroupedByDays(this.typeDate, this.year, this.numberMonth).subscribe(data => {
     this.printGraph(data)
+  },error => {
+    if(error.status === 403){
+      console.log('Usuario sin credenciales')
+    }
+    if(error.status === 404){
+      this.notFound()
+    }
   });
 }
-printGraph(data: Array<Payment> ){
+printGraph(data: Array<Payment>){
   this.payments_full=0;
   const payments = data.map( payment => {
     this.payments_full += payment.full_payment

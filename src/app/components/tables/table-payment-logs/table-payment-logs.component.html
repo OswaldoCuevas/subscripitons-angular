@@ -8,19 +8,21 @@
         <th scope="col" class="no-important"><span class="title-col">Costo</span></th>
         <th scope="col" class="no-important"><span class="title-col">Fecha</span></th>
         <th scope="col"><span class="title-col">Finalizado</span></th>
+        <th scope="col"><span class="title-col">Eliminar</span></th>
       
     </tr>
     </thead>
     <tbody class="tbody">
-        <tr  *ngFor="let paymentLog of paymentLogs" [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]">
-            <th scope="row"  >{{paymentLog.payment_logs_num}}</th>
-                <td  >{{paymentLog.customer}}</td>
-                <td >{{paymentLog.producto}}</td>
-                <td class="no-important">{{paymentLog.product_quantity}}</td>
-                <td class="no-important">{{paymentLog.price}}</td>
-                <td class="no-important">{{date(paymentLog.start_date_payment_logs)}}</td>
-                <td class="finalizado" *ngIf="!paymentLog.finalized"><span class="warning">Pendiente</span></td>
-                <td class="finalizado" *ngIf="paymentLog.finalized"><span class="success">Finalizado</span></td>
+        <tr  *ngFor="let paymentLog of paymentLogs" >
+            <th scope="row" [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]">{{paymentLog.payment_logs_num}}</th>
+                <td  [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]">{{paymentLog.customer}}</td>
+                <td [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]">{{paymentLog.producto}}</td>
+                <td [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]" class="no-important">{{paymentLog.product_quantity}}</td>
+                <td  [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]"class="no-important">{{paymentLog.price}}</td>
+                <td [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]"class="no-important">{{date(paymentLog.start_date_payment_logs)}}</td>
+                <td [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]"class="finalizado" *ngIf="!paymentLog.finalized"><span class="warning">Pendiente</span></td>
+                <td [routerLink]="['/payments-log',  paymentLog.payment_logs_id ]"class="finalizado" *ngIf="paymentLog.finalized"><span class="success">Finalizado</span></td>
+                <td> <button class="delete" (click)="delete( paymentLog.payment_logs_id,paymentLog.customer,paymentLog.payment_logs_num )"><i class="fa-solid fa-trash"></i></button></td>
                   
         </tr>
     </tbody>

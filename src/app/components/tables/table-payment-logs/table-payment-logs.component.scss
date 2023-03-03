@@ -72,6 +72,18 @@ $font-primary: 'Lato', sans-serif;
             background-color: rgb(204, 136, 10);
         
         }
+        .delete{
+            background-color: rgb(202, 19, 19);
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
         @media screen and (max-width: 968px){
             .no-important{display: none;}
         }

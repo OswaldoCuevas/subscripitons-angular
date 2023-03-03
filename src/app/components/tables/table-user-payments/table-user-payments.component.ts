@@ -23,8 +23,9 @@ constructor(private dataService:DataService){
   this.year  = object.year
   if( this.type  == "week" ){
     this.dataService.getWeeklyCustomerPayments().subscribe(data => {
+      console.log(data);
       this.Users = data;
-      console.log(this.Users);
+      
     });
     
   }else{
