@@ -1,0 +1,72 @@
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+                        <div class="text w-100">
+                            <h2>MobEmmanuel</h2>
+                            <p *ngIf="option=='signIn'">No tienes una cuenta?</p>
+                            <p *ngIf="option=='signUp'">Tienes una cuenta?</p>
+                            <a type="button" class="btn btn-white btn-outline-white" (click)="optionSignUp()"*ngIf="option=='signIn'">Registrarse</a>
+                            <a type="button" class="btn btn-white btn-outline-white" (click)="optionSignIn()" *ngIf="option=='signUp'">Iniciar sesión</a>
+                        </div>
+                    </div>
+                    <div class="login-wrap p-4 p-lg-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4" *ngIf="option=='signUp'">Regitrándose</h3>
+                                <h3 class="mb-6" *ngIf="option=='signIn'">Inicio de sesión</h3>
+                            </div>
+   
+                        </div>
+                        <form action="#" class="signin-form" (submit)="signIn(email.value,password.value)"  *ngIf="option=='signIn'">     
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Correo electrónico</label>
+                                <input #email type="text" class="form-control" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">Contraseña</label>
+                                <input #password type="password" class="form-control" placeholder="Contraseña" required>
+                            </div> 
+                            <div class="form-group">
+                                <button  class="form-control btn btn-primary submit px-3"  >Entrar</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-left">
+                                    <label class="checkbox-wrap checkbox-primary mb-0">Recordarme
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="#">Olvidé mi contraseña</a>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="#" class="signin-form" (submit)="signUp(username.value, email.value, password.value)"  *ngIf="option=='signUp'">     
+                            <div class="form-group mb-3">
+                                <label  class="label" for="name">Nombre de usuario</label>
+                                <input #username type="text" class="form-control" placeholder="Nombre de usuario" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Correo electrónico</label>
+                                <input #email type="text" class="form-control" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">Contraseña</label>
+                                <input #password type="password" class="form-control" placeholder="Contraseña" required>
+                            </div>
+                            <div class="form-group">      
+                                <button  class="form-control btn btn-primary submit px-3" >Registrarse</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

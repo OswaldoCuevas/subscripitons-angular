@@ -1,0 +1,157 @@
+<div class="content-secondary">
+    
+    <div class="info-general">
+        <nav> <span>Información general</span> </nav>
+        <div class="info-app">
+            <img [src]="Application.url_img" alt="">
+  
+        </div>
+        
+        <div class="dates">
+            <button (click)="decreaseMonth()"><i class="fa-solid fa-caret-left"></i></button>
+            <span>{{dateSelected}}</span>
+            <button (click)="incrementMonth()"><i class="fa-solid fa-caret-right"></i></button>
+        </div>
+        <div class="span-precio">
+            <span class="icon"><i class="fa-solid fa-sack-dollar"></i></span>
+            <span>{{payments_full}} MXN</span></div>
+        <canvas baseChart class="chart"
+        [data]="lineChartData"
+        [type]="lineChartType"
+></canvas>
+        <div class="filtrar-chart">
+            <span class="active-filter" (click)="changeTypeDate('month')" >Mes</span>
+            <span (click)="changeTypeDate('year')" >Año</span>
+            <span (click)="changeTypeDate('all')" >Todo</span>
+        </div>
+    </div>
+    <div class="info-users">
+        <nav class="nav-title"> <span>Pagos de suscripciones</span></nav>
+  
+        <div class="table">
+            <div class="titles">
+                <div><span>Usuario</span></div>
+                <div><span>Pago</span></div>
+                <div><span>Fecha</span></div>
+            </div>
+            <div class="info-table" *ngFor="let Payment of Payments" >
+                <div><span>{{Payment.user_username}}</span></div>
+                <div><span class="span-pay"> MXN {{Payment.payment}}</span></div>
+                <div><span>{{formatDate(Payment.date_start)}}</span></div>
+            </div>
+            
+            
+        </div>
+       
+    </div>
+    <div class="info-status-subscription">
+        <nav class="nav-title"><span>Estado de suscripciones</span></nav>
+   
+        <div class="table">
+            <div class="titles">
+                <div><span>Usuario</span></div>
+                <div><span>Estado</span></div>
+            </div>
+            <div class="info-table" *ngFor="let StatusSubscription of StatusSubscriptions">
+                <div (click)="showPaymentsUser(StatusSubscription.id_user,StatusSubscription.id_application)"><span>{{StatusSubscription.username}}</span></div>
+                <div (click)="showPaymentsUser(StatusSubscription.id_user,StatusSubscription.id_application)">
+                    <span class="span-success" *ngIf="StatusSubscription.status == 'Activo'">{{StatusSubscription.days_remaining}} días</span>
+                    <span class="span-warning" *ngIf="StatusSubscription.status == 'Vencido'">{{StatusSubscription.days_remaining}} días</span>
+                    <span class="span-danger" *ngIf="StatusSubscription.status == 'Suspendido'">Suspendida</span>
+                </div>
+                <div class="main-pop" tabindex="1">
+                    <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                    <nav>
+                        <ul  (click)="showActive(StatusSubscription.id_user)">Activar</ul>
+                        <ul (click)="showCancel(StatusSubscription.id_user)">Cancelar</ul>
+                    </nav>
+                </div>
+            </div>
+          
+            
+            
+            
+        </div>
+       
+    </div>
+    <div class="popup" id="info">
+        <div class="popup-content">
+          <div class="popup-header">
+            <nav>
+                <span >Información de la suscripción</span>
+                <button class="close" (click)="closePopup('info')"><i class="fa-solid fa-xmark"></i></button>
+              </nav>
+         
+           
+          </div>
+          <div class="popup-body">
+            <div class="table-alert">
+                <div class="titles">
+                    <div><span>Usuario</span></div>
+                    <div><span>Pago</span></div>
+                    <div><span>Fecha</span></div>
+                </div>
+                <div class="info-table" *ngFor="let PaymentUser of PaymentsUser">
+                    <div><span>{{PaymentUser.user_username}}</span></div>
+                    <div><span class="span-pay">${{PaymentUser.payment}}MXN</span></div>
+                    <div><span>{{formatDate(PaymentUser.date_start)}}</span></div>
+                </div>
+                
+            </div>
+          </div>
+          <div class="popup-footer">
+            <button class="btn btn-primary" (click)="closePopup('info')">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    <div class="popup" id="Cancel">
+        <div class="popup-content">
+          <div class="popup-header">
+            <h2>¿Seguro que desea Cancelar la suscripción?</h2>
+            <button class="close" (click)="closePopup('Cancel')">&times;</button>
+          </div>
+          <div class="popup-body">
+            <p id="message-cancel">El usuario ya no podrá acceder a la apliicación hasta que se realice el pago.</p>
+            <span class="status-progress">
+              <p>Eliminando suscripción</p>
+            </span>
+            <div class="progress-bar">
+               <div class="progress-bar-loading">
+                 
+               </div>
+            </div>
+            <div class="load-success">
+              <span id="icon-success"><i class="fa-solid fa-circle-check"></i></span>
+              <span id="message-success">Se eliminó la suscripción con éxito</span>
+            </div>
+            <div class="load-danger">
+              <span id="icon-danger"><i class="fa-solid fa-circle-exclamation"></i></span>
+              <span id="message-danger">Operación cancelada</span>
+            </div>
+            
+              <button id="cancelNot">Cancelar operación</button>
+              <button id="closeWindow" (click)="closeCancel()">Cerrar ventana</button>
+             
+           
+          </div>
+          <div class="popup-footer">
+            <button class="btn btn-primary" id="btn-cancel" (click)="executeCancel()">Aceptar</button>
+          </div>
+          
+        </div>
+      </div>
+    <div class="popup" id="Active">
+        <div class="popup-content">
+          <div class="popup-header">
+            <h2>¿Seguro que desea activar la suscripción?</h2>
+            <span class="close" (click)="closePopup('Active')">&times;</span>
+          </div>
+          <div class="popup-body">
+            <p>Se guardará el pago en efectivo en la base de datos y se activará la cuenta.</p>
+          </div>
+          <div class="popup-footer">
+            <button class="btn btn-primary" (click)="ActiveSubscription()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+</div>

@@ -1,13 +1,88 @@
-<div class="content-secondary">
-    <div class="info-general">
-        <nav> <span>Información general</span> </nav>
-        <app-line-chart (messageEvent)="receiveMessage($event)"></app-line-chart>
-    </div>
-    <div class="info-users">
-        <nav class="nav-options-user">
-            <span class="active option" (click)="payments($event)" >Pagados</span>
-            <span class="option" (click)="notPayments($event)">Pendientes</span>
-        </nav>
-        <app-table-user-payments></app-table-user-payments>
-    </div>
+<div class="content-home">
+    <button id="addSubscription" (click)="showRegister()"><i class="fa-solid fa-plus"></i></button>
+     <div class="item" [routerLink]="['/application',  application.id ]" *ngFor="let application of Applications">
+        <div class="logo">
+            <img [src]="application.url_img" >
+        </div>
+        <div class="info">
+            <div class="header">
+                
+                <nav>
+                    <span class="name"> {{application.name}}</span>
+                <button id="update" (click)="showUpdate($event,application.id)">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                </nav>
+                <div class="code">
+                    <span class="icon"><i class="fa-solid fa-hashtag"></i></span>
+                     <span>{{application.code}}</span>
+                 </div>
+               
+            </div>
+            <div class="body">
+                    
+                    <div class="price">
+                        <span>${{application.price}} MXN</span>
+                    </div>
+            </div>
+            <div class="footer">
+                
+                    <span >
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <span > {{application.subscriptions}} suscripciones </span>
+                      </span>
+                    <span >
+                        <span class="icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <span>{{formatDate(application.date_create)}} </span>
+                    </span>
+            </div>
+        </div>
+     </div>
+     <form (submit)="submit(logo, name, price,code)"  class="popup" id="alertCRUD" #popup="ngForm">
+        <div class="popup-content">
+          <div class="popup-header">
+            <nav>
+              <span id="title-alert"></span>
+              <a class="close" (click)="closePopup()"><i class="fa-solid fa-xmark"></i></a>
+            </nav>
+          </div>
+          <div class="popup-body">
+            <div class="content-img" >
+              <div class="img" id="image">
+                <span id="span-logo"><i class="fa-regular fa-image"></i></span>
+                <img id="img-logo" src="#" style="display: none;" width="100%" height="100%" >
+              </div>
+              <a id="btn-logo-app"> Selecione la imagen</a>
+              <input #logo type="file" id="logo-app" #logoInput (change)="readFile($event)">
+               <span class="message-error" id="logo-app-error">No ha cargado ningún logo</span>
+               <span class="message-error" id="logo-app-error2">El formato debe ser png</span>
+            </div>
+            <div class="input-field">
+              <label for="code"> Código de la aplicación</label>
+              <input #code id="code" type="text"   autocomplete="off">
+              <div class="border"></div>
+          </div>
+          <span class="message-error" id="code-error">No ha introducido un código</span>
+            <div class="input-field">
+                <label for="name"> Nombre de la aplicación</label>
+                <input #name id="name" type="text"   autocomplete="off">
+                <div class="border"></div>
+            </div>
+            <span class="message-error" id="name-error">No ha introducido un nombre</span>
+            <div class="input-field">
+              <label for="price"> Precio de suscripción</label>
+              <input #price id="price" type="number" autocomplete="off" > 
+              <div class="border"></div>    
+            </div>
+              <span class="message-error" id="price-error">No ha introducido un precio</span>
+          </div>
+          <div class="popup-footer">
+            <button class="btn btn-primary" >Aceptar</button>
+          </div>
+        </div>
+      </form>
 </div>

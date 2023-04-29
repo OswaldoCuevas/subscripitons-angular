@@ -1,16 +1,18 @@
 
 <nav class="dashboard-nav-list nav-light">
-  <ul class="dashboard-nav-logo">
-      <a href="#"><span>MobEmmanuel</span></a>
-  </ul>
-  <ul class="dashboard-nav-items">
-      <li class="nav-item"><a routerLink="/home" ><span>Inicio</span></a></li>
-      <li class="nav-item"><a routerLink="/payments-logs" id="tarjetas" ><span>Tarjetas</span></a></li>
-      <li class="nav-item"><a id="log-out" ><span>Cerrar Sesión</span></a></li>
-   </ul>
-   
-      <span class="bars show-items"><i class="fa-solid fa-bars"></i></span>
-      <span class="bars hide-items"><i class="fa-solid fa-xmark"></i></span>
-   
+    <ul class="dashboard-nav-logo">
+        <a href="#"><span>Suscripciones</span></a>
+    </ul>
+    <ul class="dashboard-nav-items">
+        <li class="nav-item nav" routerLink="/home"><a id="home" class="active"><span>Inicio</span></a></li>
+        <li class="nav-item nav"><a id="administradores" ><span>Administradores</span></a></li>
+        <li class="nav-item nav" (click)="logout()"><a id="log-out" ><span>Cerrar Sesión</span></a></li>
+     </ul>
+     
+        <span class="bars show-items"><i class="fa-solid fa-bars"></i></span>
+        <span class="bars hide-items"><i class="fa-solid fa-xmark"></i></span>
+     
 </nav>
+      
+
 <router-outlet></router-outlet>

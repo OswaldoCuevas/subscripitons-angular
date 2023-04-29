@@ -2,7 +2,7 @@ import { Component,Output, EventEmitter, ViewChild  } from '@angular/core';
 import { Data } from '@angular/router';
 import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { Payment } from 'src/app/interfaces/payment.interface';
+// import { Payment } from 'src/app/interfaces/payment.interface';
 import { DataService } from '../../data.service';
 @Component({
   selector: 'app-line-chart',
@@ -107,58 +107,58 @@ if(this.typeDate == "week"){
 }else{
   this.getPaymentsGroupedByDays()
 }
-this.messageEvent.emit({type:this.typeDate,month:this.numberMonth,year:this.year})
+this.messageEvent.emit({type:this.typeDate,month:this.numberMonth+1,year:this.year})
 }
 //imprimir grafica con datos del server
 getWeeklyPayments(){
-  this.dataService.getWeeklyPayments().subscribe(data => {
+  // this.dataService.getWeeklyPayments().subscribe(data => {
     
-    this.printGraph(data)
+  //   this.printGraph(data)
  
     
-  },error => {
-    if(error.status === 403){
-      console.log('Usuario sin credenciales')
-    }
-    if(error.status === 404){
-      this.notFound()
-    }
-  });
+  // },error => {
+    
+  //   if(error.status === 404){
+  //     this.notFound()
+     
+  //   }
+  // });
 }
 notFound(){
+  this.payments_full=0;
   this.lineChartData.datasets[0].data = [0]
   this.lineChartData.datasets[1].data =  [0]
   this.lineChartData.labels =  [0]
   this.chart?.update();
 }
 getPaymentsGroupedByDays(){
-  this.dataService.getPaymentsGroupedByDays(this.typeDate, this.year, this.numberMonth).subscribe(data => {
-    this.printGraph(data)
-  },error => {
-    if(error.status === 403){
-      console.log('Usuario sin credenciales')
-    }
-    if(error.status === 404){
-      this.notFound()
-    }
-  });
+  // this.dataService.getPaymentsGroupedByDays(this.typeDate, this.year, this.numberMonth+1).subscribe(data => {
+  //   this.printGraph(data)
+  // },error => {
+  //   if(error.status === 403){
+  //     console.log('Usuario sin credenciales')
+  //   }
+  //   if(error.status === 404){
+  //     this.notFound()
+  //   }
+  // });
 }
-printGraph(data: Array<Payment>){
-  this.payments_full=0;
-  const payments = data.map( payment => {
-    this.payments_full += payment.full_payment
-    return payment.full_payment
-  })
-  const amount = data.map( payment => {
-    return payment.amount_of_payments;
-  })
-  const labels = data.map( payment => {
-    return payment._day;
-  })
-  this.lineChartData.datasets[0].data = payments
-  this.lineChartData.datasets[1].data = amount
-  this.lineChartData.labels = labels
-  this.chart?.update();
-}
+// printGraph(data: Array<Payment>){
+//   this.payments_full=0;
+//   const payments = data.map( payment => {
+//     return payment.full_payment
+//   })
+//   const amount = data.map( payment => {
+//     return payment.amount_of_payments;
+//   })
+//   const labels = data.map( payment => {
+//     return payment._day;
+//   })
+//   this.payments_full= payments.reduce(  (accumulator, currentValue) => accumulator + currentValue,0);
+//   this.lineChartData.datasets[0].data = payments
+//   this.lineChartData.datasets[1].data = amount
+//   this.lineChartData.labels = labels
+//   this.chart?.update();
+// }
 }
 
